@@ -30,23 +30,20 @@ const url = 'https://dog.ceo/api/breeds/image/random';
 
 
 try {
-  const myData = await myAsync(url);
-  setInterval(() => {
-  console.log(myData.message);  
-  body.insertAdjacentHTML(
-  'beforeend',
-    `
-      <figure>
-        <img src="${myData.message}" /
-  	  </figure>
-	  `
-  );
-  }, 3000);
-
+  for (let i = 0; i < 10; i++) {
+    const myData = await myAsync(url);
+    console.log(myData.message);
+    body.insertAdjacentHTML(
+      'beforeend',
+      `<figure>
+        <img src="${myData.message}" />
+      </figure>`
+      );
+      await new Promise((resolve) => setTimeout(resolve, 3000));
+  }  
 } catch (error) {
 	console.log(error.message);
 }
-
 function reload() {
   document.location.reload();
 }
